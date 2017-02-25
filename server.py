@@ -30,10 +30,7 @@ def handle_verification():
 @app.route('/', methods=['POST'])
 
 def webhook():
-   #s data = request.get_json()
-
-
-    
+   #s data = request.get_json()    
 
     #Uid - QuintanilhaEdu: 1746854645630719
     user = '1746854645630719'
@@ -45,11 +42,11 @@ def webhook():
     #print('\n=====================\n{}\n==============\n\n'.format(text))
     sender = data['entry'][0]['messaging'][0]['sender']['id']
     payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}}
-    #r = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=payload)
+    r = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=payload)
 
-    typ = {'recipient':{'id':sender},'sender_action':'typing_on'}
+    #typ = {'recipient':{'id':sender},'sender_action':'typing_on'}
 
-    c = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=typ)
+    #c = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=typ)
 
 
 
