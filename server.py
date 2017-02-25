@@ -22,7 +22,7 @@ app = Flask(__name__)
  
 @app.route('/', methods=['GET'])
 def handle_verification():
-    if request.args['hub.verify_token'] == 'quintanilha':
+    if request.args['hub.verify_token'] == 'EAARnqZCEhc8sBAM4kYOmmK0R4lQ7zu93rLg7ZBr1OZBqsCZBch1wzTuijNpnH2ZAadkVyhpojiiSBLhIj3jAi4ZCq0eNeKgnKOrMISKbErHAarptpJ7slGNg6y5zQYL8C2nBWQs89nkNSnq7ZAJ107LVG0QopUtuZCZB37Uk5j3qUYAZDZD':
         return request.args['hub.challenge','ok']
     else:
         return "Error, Invalid Token!"
