@@ -13,6 +13,8 @@ import json
 ## Token = 25/02/2017 - 01:03h ##
 ## EAARnqZCEhc8sBAM4kYOmmK0R4lQ7zu93rLg7ZBr1OZBqsCZBch1wzTuijNpnH2ZAadkVyhpojiiSBLhIj3jAi4ZCq0eNeKgnKOrMISKbErHAarptpJ7slGNg6y5zQYL8C2nBWQs89nkNSnq7ZAJ107LVG0QopUtuZCZB37Uk5j3qUYAZDZD
 
+#Token - 25/02/2017 - 10:48h
+# EAARnqZCEhc8sBAL3nFiAMwPIb5g3PEWV8SiUQkBGhMPIJXpWiCyIZBDnK5uFJNiVbBxuDExgaTfucU3Qvgufwu9P1ODgsdkQLskAamBXMXnq1QSoKjwmK9XLBCxsmBmt5rJdufcKDByYFj1WayWI6CWG4Q7S4OJiZCDzEAVrQZDZD
 
 
 
@@ -22,7 +24,7 @@ app = Flask(__name__)
  
 @app.route('/', methods=['GET'])
 def handle_verification():
-    if request.args['hub.verify_token'] == 'quintanilha':
+    if request.args['hub.verify_token'] == 'EAARnqZCEhc8sBAL3nFiAMwPIb5g3PEWV8SiUQkBGhMPIJXpWiCyIZBDnK5uFJNiVbBxuDExgaTfucU3Qvgufwu9P1ODgsdkQLskAamBXMXnq1QSoKjwmK9XLBCxsmBmt5rJdufcKDByYFj1WayWI6CWG4Q7S4OJiZCDzEAVrQZDZD':
         return request.args['hub.challenge','ok']
     else:
         return "Error, Invalid Token!"
@@ -34,7 +36,7 @@ def webhook():
 
     #Uid - QuintanilhaEdu: 1746854645630719
     user = '1746854645630719'
-    token = "EAARnqZCEhc8sBAM4kYOmmK0R4lQ7zu93rLg7ZBr1OZBqsCZBch1wzTuijNpnH2ZAadkVyhpojiiSBLhIj3jAi4ZCq0eNeKgnKOrMISKbErHAarptpJ7slGNg6y5zQYL8C2nBWQs89nkNSnq7ZAJ107LVG0QopUtuZCZB37Uk5j3qUYAZDZD"
+    #token = "EAARnqZCEhc8sBAM4kYOmmK0R4lQ7zu93rLg7ZBr1OZBqsCZBch1wzTuijNpnH2ZAadkVyhpojiiSBLhIj3jAi4ZCq0eNeKgnKOrMISKbErHAarptpJ7slGNg6y5zQYL8C2nBWQs89nkNSnq7ZAJ107LVG0QopUtuZCZB37Uk5j3qUYAZDZD"
     
     data = json.loads(request.data.decode('utf-8'))
 
