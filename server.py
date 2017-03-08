@@ -25,7 +25,7 @@ app = Flask(__name__)
 # Data - 03/03/2017 - 22:58h
 token = 'EAARnqZCEhc8sBAJyXtCJpjLQp3ZCJ7pPPRM8ZCRzvQ4hZAZBOMMUQ7UDHp68LtoJ0dCIURWyd6r1P2hoXlmP29l5Jpc5jgtrmIDertEdrXOS7enxzmFWB7nkPzG8Qo04UOqHndmZCc3AJXgXRYWdDmCaT3vef0bWpltQs9F6YaVwZDZD'
 
-'''
+
 #FUNCIONA PARA AUTENTICAR O WEBHOOK PRIMARIO -----
 @app.route('/', methods=['GET'])
 def handle_verification():
@@ -34,7 +34,7 @@ def handle_verification():
 if __name__ == '__main__':
     app.run(debug=True)
 # -----------------------------------------------------
-'''
+
 @app.route('/', methods=['POST'])
 
 def webhook():
