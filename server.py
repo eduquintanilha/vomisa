@@ -22,17 +22,22 @@ import json
 
 app = Flask(__name__)
  
+# Data - 03/03/2017 - 22:58h
+token = 'EAARnqZCEhc8sBAJyXtCJpjLQp3ZCJ7pPPRM8ZCRzvQ4hZAZBOMMUQ7UDHp68LtoJ0dCIURWyd6r1P2hoXlmP29l5Jpc5jgtrmIDertEdrXOS7enxzmFWB7nkPzG8Qo04UOqHndmZCc3AJXgXRYWdDmCaT3vef0bWpltQs9F6YaVwZDZD'
+
+'''
+#FUNCIONA PARA AUTENTICAR O WEBHOOK PRIMARIO -----
 @app.route('/', methods=['GET'])
 def handle_verification():
-    if request.args['hub.verify_token'] == 'EAARnqZCEhc8sBAL3nFiAMwPIb5g3PEWV8SiUQkBGhMPIJXpWiCyIZBDnK5uFJNiVbBxuDExgaTfucU3Qvgufwu9P1ODgsdkQLskAamBXMXnq1QSoKjwmK9XLBCxsmBmt5rJdufcKDByYFj1WayWI6CWG4Q7S4OJiZCDzEAVrQZDZD':
-        return request.args['hub.challenge','ok']
-    else:
-        return "Error, Invalid Token!"
+    return request.args['hub.challenge']
 
+if __name__ == '__main__':
+    app.run(debug=True)
+# -----------------------------------------------------
+'''
 @app.route('/', methods=['POST'])
 
 def webhook():
-   #s data = request.get_json()    
 
     #Uid - QuintanilhaEdu: 1746854645630719
     user = '1746854645630719'
@@ -40,21 +45,28 @@ def webhook():
     
     data = json.loads(request.data.decode('utf-8'))
 
-    #text = data['entry'][0]['messaging'][0]['message']
-    #print('\n=====================\n{}\n==============\n\n'.format(text))
-    sender = data['entry'][0]['messaging'][0]['sender']['id']
-    payload = {'recipient': {'id': sender}, 'message': {'text': "Hello World"}}
-    r = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=payload)
+    for entry in data["entry"]:
+    	for messaging_event in entry["messaging"]:
 
-    #typ = {'recipient':{'id':sender},'sender_action':'typing_on'}
+    		if messaging_event.get("message"):
+    			text = data['entry'][0]['messaging'][0]['message']
+    			#print('\n=====================\n{}\n==============\n\n'.format(text))
+    			
+    			if(text == "teste" | text == "Teste"):
+    				sender = data['entry'][0]['messaging'][0]['sender']['id']
+    				payload = {'recipient': {'id': sender}, 'message': {'text': "Seu teste funcionou!"}}
+    				r = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=payload)
+    			else:
+    				sender = data['entry'][0]['messaging'][0]['sender']['id']
+    				payload = {'recipient': {'id': sender}, 'message': {'text': "Desculpe. Não reconheço esses comandos.  :("}}
+    				r = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=payload)
 
-    #c = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=typ)
+    			#typ = {'recipient':{'id':sender},'sender_action':'typing_on'}
 
+    			#c = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=typ)
 
+    return("\nok\n",200)
 
-    return("ok",200)
 
 if __name__ == '__main__':
-	port = int(os.environ.get("PORT",5000))
-	#app.run(debug=True)
-	app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
