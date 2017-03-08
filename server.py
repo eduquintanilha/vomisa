@@ -21,10 +21,12 @@ import json
 # Autenticação nos Webhooks 
 
 app = Flask(__name__)
- 
+
+port = int(os.environ.get("PORT"))
+''' 
 # Data - 03/03/2017 - 22:58h
 token = 'EAARnqZCEhc8sBAJyXtCJpjLQp3ZCJ7pPPRM8ZCRzvQ4hZAZBOMMUQ7UDHp68LtoJ0dCIURWyd6r1P2hoXlmP29l5Jpc5jgtrmIDertEdrXOS7enxzmFWB7nkPzG8Qo04UOqHndmZCc3AJXgXRYWdDmCaT3vef0bWpltQs9F6YaVwZDZD'
-port = int(os.environ.get("PORT"))
+
 
 #FUNCIONA PARA AUTENTICAR O WEBHOOK PRIMARIO -----
 @app.route('/', methods=['GET'])
@@ -41,7 +43,8 @@ def webhook():
 
     #Uid - QuintanilhaEdu: 1746854645630719
     user = '1746854645630719'
-    #token = "EAARnqZCEhc8sBAM4kYOmmK0R4lQ7zu93rLg7ZBr1OZBqsCZBch1wzTuijNpnH2ZAadkVyhpojiiSBLhIj3jAi4ZCq0eNeKgnKOrMISKbErHAarptpJ7slGNg6y5zQYL8C2nBWQs89nkNSnq7ZAJ107LVG0QopUtuZCZB37Uk5j3qUYAZDZD"
+    #token 08/03/2017 - 20:33h
+    token = "EAARnqZCEhc8sBAFjSXzGdTcUSZCZA5zW8v6futWExamOZBWquFzN8ErpBthsouZCTfjtZCibYd7ZCijYqoxB8FmRmpNSpEP9y2X43VqxxsfrKvabmPZCJtj4QxKZAH6IWpYp3X9fE7ksGj8vavWGT9Ct72RS6OvudZCqeMFRURCkLKrwZDZD"
     
     data = json.loads(request.data.decode('utf-8'))
 
@@ -69,5 +72,5 @@ def webhook():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
-'''
+    app.run(host='0.0.0.0', port=port)
+
