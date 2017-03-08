@@ -32,7 +32,7 @@ def handle_verification():
     return request.args['hub.challenge']
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
 # -----------------------------------------------------
 '''
 @app.route('/', methods=['POST'])
