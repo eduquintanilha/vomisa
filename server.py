@@ -34,7 +34,7 @@ def handle_verification():
 if __name__ == '__main__':
     app.run(debug=True)
 # -----------------------------------------------------
-
+'''
 @app.route('/', methods=['POST'])
 
 def webhook():
