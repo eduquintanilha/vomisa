@@ -51,17 +51,13 @@ def handle_verification():
   else:
     print "Verification failed!"
     return 'Error, wrong validation token'
-
-@app.route('/', methods=['POST'])
-
-
     
 def reply(user_id, msg):
     data = {
     "recipient": {"id": user_id},
     "message": {"text": msg}
     }
-    resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + token, json=data)
+    resp = requests.post("https://graph.facebook.com/v2.8/me/messages/?access_token=" +token, json=data)
     print(resp.content)
 
 @app.route('/', methods=['POST'])
@@ -72,7 +68,7 @@ def handle_incoming_messages():
     message = data['entry'][0]['messaging'][0]['message']['text']
     print('message: {}'.format(message))
 
-    #reply(sender, message[::-1])
+    reply(sender, message[::-1])
  
     return "ok"
 
