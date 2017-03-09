@@ -62,13 +62,15 @@ def reply(user_id, msg):
 
 @app.route('/', methods=['POST'])
 def handle_incoming_messages():
-    data = request.get_json(force=True)
+    #data = request.json ---Tutorial funcionou assim
+    data = json.loads(request.data.decode('utf-8'))
     sender = data['entry'][0]['messaging'][0]['sender']['id']
     print('sender: {}'.format(sender))
     message = data['entry'][0]['messaging'][0]['message']['text']
-    message.put('text','FUNCIONA?')
     print('message: {}'.format(message))
+    message = message.text('testando')
 
+    print(message+'2')
     reply(sender, message)
  
     return "ok"
