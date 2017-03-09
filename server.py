@@ -66,9 +66,10 @@ def handle_incoming_messages():
     sender = data['entry'][0]['messaging'][0]['sender']['id']
     print('sender: {}'.format(sender))
     message = data['entry'][0]['messaging'][0]['message']['text']
+    message.put('text','FUNCIONA?')
     print('message: {}'.format(message))
 
-    reply(sender, message.append('\n\nFuncionou!'))
+    reply(sender, message)
  
     return "ok"
 
@@ -105,6 +106,7 @@ def webhook():
     return("\nok\n",200)
 '''
 
+######### For HEROKU DEPLOY  ##########
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
-
+#######################################
