@@ -68,10 +68,10 @@ def handle_incoming_messages():
     print('sender: {}'.format(sender))
     message = data['entry'][0]['messaging'][0]['message']['text']
     print('message: {}'.format(message))
-    message = data['entry'][0]['messaging'][0]['message']['text':'FUNCIONA?']
 
-    print(message+'==========> 2')
-    reply(sender, message)
+    if(message == 'teste'):
+        print('ok')
+        reply(sender, 'OK')
  
     return "ok"
 
