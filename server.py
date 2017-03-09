@@ -23,6 +23,11 @@ import json
 app = Flask(__name__)
 
 port = int(os.environ.get("PORT"))
+
+#token 08/03/2017 - 20:33h
+token = "EAARnqZCEhc8sBAFjSXzGdTcUSZCZA5zW8v6futWExamOZBWquFzN8ErpBthsouZCTfjtZCibYd7ZCijYqoxB8FmRmpNSpEP9y2X43VqxxsfrKvabmPZCJtj4QxKZAH6IWpYp3X9fE7ksGj8vavWGT9Ct72RS6OvudZCqeMFRURCkLKrwZDZD"
+    
+
 ''' 
 # Data - 03/03/2017 - 22:58h
 token = 'EAARnqZCEhc8sBAJyXtCJpjLQp3ZCJ7pPPRM8ZCRzvQ4hZAZBOMMUQ7UDHp68LtoJ0dCIURWyd6r1P2hoXlmP29l5Jpc5jgtrmIDertEdrXOS7enxzmFWB7nkPzG8Qo04UOqHndmZCc3AJXgXRYWdDmCaT3vef0bWpltQs9F6YaVwZDZD'
@@ -37,15 +42,48 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
 # -----------------------------------------------------
 '''
+@app.route('/', methods=['GET'])
+def handle_verification():
+  print "--- Handling Verification. -----"
+  if request.args.get('hub.verify_token', '') == 'quintanilha':
+    print "Verification successful!"
+    return request.args.get('hub.challenge', '')
+  else:
+    print "Verification failed!"
+    return 'Error, wrong validation token'
+
 @app.route('/', methods=['POST'])
 
+
+    
+def reply(user_id, msg):
+    data = {
+    "recipient": {"id": user_id},
+    "message": {"text": msg}
+    }
+    resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + token, json=data)
+    print(resp.content)
+
+@app.route('/', methods=['POST'])
+def handle_incoming_messages():
+    data = request.json
+    sender = data['entry'][0]['messaging'][0]['sender']['id']
+    print('sender: {}'.format(sender))
+    message = data['entry'][0]['messaging'][0]['message']['text']
+    print('message: {}'.format(message))
+
+    #reply(sender, message[::-1])
+ 
+    return "ok"
+
+''' TESTE FUNCIONAL
 def webhook():
 
     #Uid - QuintanilhaEdu: 1746854645630719
     user = '1746854645630719'
     #token 08/03/2017 - 20:33h
     token = "EAARnqZCEhc8sBAFjSXzGdTcUSZCZA5zW8v6futWExamOZBWquFzN8ErpBthsouZCTfjtZCibYd7ZCijYqoxB8FmRmpNSpEP9y2X43VqxxsfrKvabmPZCJtj4QxKZAH6IWpYp3X9fE7ksGj8vavWGT9Ct72RS6OvudZCqeMFRURCkLKrwZDZD"
-    
+
     data = json.loads(request.data.decode('utf-8'))
 
     for entry in data["entry"]:
@@ -69,7 +107,7 @@ def webhook():
     			#c = requests.post('https://graph.facebook.com/v2.8/me/messages/?access_token='+token,json=typ)
 
     return("\nok\n",200)
-
+'''
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
