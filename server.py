@@ -68,7 +68,7 @@ def handle_incoming_messages():
     message = data['entry'][0]['messaging'][0]['message']['text']
     print('message: {}'.format(message))
 
-    reply(sender, message[::-1])
+    reply(sender, message.append('\n\nFuncionou!'))
  
     return "ok"
 
