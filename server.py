@@ -62,7 +62,7 @@ def reply(user_id, msg):
 
 @app.route('/', methods=['POST'])
 def handle_incoming_messages():
-    data = request.json
+    data = request.get_json(force=True)
     sender = data['entry'][0]['messaging'][0]['sender']['id']
     print('sender: {}'.format(sender))
     message = data['entry'][0]['messaging'][0]['message']['text']
